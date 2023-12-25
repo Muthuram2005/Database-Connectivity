@@ -1,0 +1,43 @@
+package crud; 
+import java.sql.*; 
+import java.util.Scanner; 
+public class CRUD  
+{ 
+    public static void main(String[] args)  
+{ 
+        Scanner sc=new Scanner(System.in); 
+      System.out.println("Enter Id:"); 
+      String userid =sc.next(); 
+      System.out.println("Enter NAME"); 
+      String name =sc.next(); 
+      System.out.println("Enter Age"); 
+      String age = sc.next(); 
+       
+        try 
+        {  
+   Class.forName("com.mysql.cj.jdbc.Driver"); 
+   Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Anand5", "root", 
+"Root"); 
+   PreparedStatement pst = connect.prepareStatement("insert into students(id,name,age) 
+values(?,?,?)"); 
+   pst.setString(1,userid); 
+  pst.setString(2, name); 
+  pst.setString(3, age); 
+          
+  int i = pst.executeUpdate(); 
+  if(i!=0) 
+{ 
+        System.out.println("added"); 
+} 
+else 
+{ 
+        System.out.println("failed"); 
+ } 
+    } 
+     
+    catch (Exception e){ 
+     System.out.println(e); 
+    } 
+     
+} 
+}
